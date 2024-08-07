@@ -80,15 +80,6 @@
                 height: 180px;
             }
         }
-        #audio::-webkit-media-controls-download-button {
-            display: none;
-        }
-        #audio::-webkit-media-controls-enclosure {
-            overflow: hidden;
-        }
-        #audio::-webkit-media-controls-panel {
-            width: calc(100% + 30px);
-        }
     </style>
 </head>
 <body>
@@ -101,7 +92,7 @@
         <iframe title="Playlist 1" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1815794400&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
     </div>
     <div id="player">
-        <audio id="audio" controls controlsList="nodownload" oncontextmenu="return false;" crossorigin="anonymous">
+        <audio id="audio" controls crossorigin="anonymous">
             Your browser does not support the audio element.
         </audio>
         <div id="playlist">
@@ -128,36 +119,12 @@
                     });
                 });
             }
-            
-            // Disable right-click on the audio element
             audio.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
             });
-            
-            // Disable keyboard shortcuts
             document.addEventListener('keydown', function(e) {
                 if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
                     e.preventDefault();
-                }
-            });
-
-            // Disable drag and drop for the audio element
-            audio.addEventListener('dragstart', function(e) {
-                e.preventDefault();
-            });
-
-            // Hide download option in the audio context menu
-            audio.controlsList.add('nodownload');
-
-            // Obfuscate the audio source
-            const originalSrc = audio.src;
-            audio.src = '';
-            Object.defineProperty(audio, 'src', {
-                get: function() {
-                    return originalSrc;
-                },
-                set: function(newValue) {
-                    // You can add additional logic here if needed
                 }
             });
         });
